@@ -19,29 +19,40 @@ gulp.task('lint', function() {
 
 //delete dist folder
 gulp.task('clean', function() {
-    del(['dist', 'scripts']);
+    return del(['dist', 'scripts']);
 });
 
 // Compile Our Sass
 gulp.task('sass', function() {
-    return gulp.src('src/layout/*.scss')
+    return gulp.src('src/client/layout/*.scss')
         .pipe(sass())
         .pipe(gulp.dest('dist/layout/css'));
 });
 
 //Compile ts to js
-gulp.task('compile', function () {
-    return gulp.src('src/**/*.ts')
+gulp.task('compile', ['compileClient', 'compileServer']);
+
+gulp.task('compileClient', function () {
+    return gulp.src('src/client/**/*.ts')
         .pipe(ts({
             noImplicitAny: true,
-            out: 'output.js'
+            out: 'client.js'
+        }))
+        .pipe(gulp.dest('scripts'));
+});
+
+gulp.task('compileServer', function () {
+    return gulp.src('src/server/**/*.ts')
+        .pipe(ts({
+            noImplicitAny: true,
+            out: 'server.js'
         }))
         .pipe(gulp.dest('scripts'));
 });
 
 // Concatenate & Minify JS
 gulp.task('minify', ['compile'], function() {
-    return gulp.src('scripts/*.js')
+    return gulp.src('scripts/client.js')
         .pipe(concat('all.js'))
         .pipe(rename('all.min.js'))
         .pipe(uglify())
@@ -50,7 +61,7 @@ gulp.task('minify', ['compile'], function() {
 
 // Watch Files For Changes
 gulp.task('watch', function() {
-    gulp.watch('src/**/*.ts', ['lint', 'compile']);
+    gulp.watch('src/**/*.ts', ['lint', 'compile', 'minify']);
     gulp.watch('src/layout/*.scss', ['sass']);
 });
 
