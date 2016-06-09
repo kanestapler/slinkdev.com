@@ -19,7 +19,7 @@ gulp.task('lint', function() {
 
 //delete dist folder
 gulp.task('clean', function() {
-    return del(['dist', 'scripts']);
+    return del(['dist', 'scripts', 'app/*.js', 'app/*.js.map']);
 });
 
 // Compile Our Sass
