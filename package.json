@@ -1,0 +1,18 @@
+{
+  "name": "slinkdev.com",
+  "version": "1.0.0",
+  "dependencies": {
+    "angular": "^1.5.6",
+    "angular-animate": "^1.5.6",
+    "angular-aria": "^1.5.6",
+    "angular-material": "^1.1.0-rc.5"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kanestapler/slinkdev.com.git"
+  },
+  "author": "Kane Stapler",
+  "license": "MIT",
+  "homepage": "https://github.com/kanestapler/slinkdev.com#readme"
+}
