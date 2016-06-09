@@ -17,6 +17,11 @@ gulp.task('lint', function() {
         .pipe(jshint.reporter('default'));
 });
 
+//delete dist folder
+gulp.task('clean', function() {
+    del(['dist', 'scripts']);
+});
+
 // Compile Our Sass
 gulp.task('sass', function() {
     return gulp.src('src/layout/*.scss')
@@ -34,11 +39,6 @@ gulp.task('compile', function () {
         .pipe(gulp.dest('scripts'));
 });
 
-//delete dist folder
-gulp.task('clean', function() {
-    del(['dist', 'scripts']);
-});
-
 // Concatenate & Minify JS
 gulp.task('minify', ['compile'], function() {
     return gulp.src('scripts/*.js')
@@ -53,6 +53,8 @@ gulp.task('watch', function() {
     gulp.watch('src/**/*.ts', ['lint', 'compile']);
     gulp.watch('src/layout/*.scss', ['sass']);
 });
+
+gulp.task('build', ['lint', 'sass', 'compile', 'minify']);
 
 // Default Task
 gulp.task('default', ['lint', 'sass', 'compile', 'minify', 'watch']);
