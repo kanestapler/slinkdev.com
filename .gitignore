@@ -2,3 +2,5 @@
 /dist
 /scripts
 /typings
+*.map
+*.js
