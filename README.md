@@ -5,3 +5,6 @@
 
 ## Setup
 1. `npm install`
+
+## Running App
+1. `npm start`
